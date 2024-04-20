@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<arg name="play_sound_after_calibration" 	default="false" />
+
+	<node pkg="vicon_sync" type="vicon_sync_node" 	name="vicon_broadcaster_sync" output="screen">
+		<param name="port" 			value="1030" />
+
+		<remap from="/calibrate_imus" 		to="/ik_lowerbody_node/calibrate"/>
+		<remap from="/start" 			to="/ik_lowerbody_node/start_recording"/>
+		<remap from="/stop"  			to="/ik_lowerbody_node/stop_recording"/>
+		<remap from="/save_sto" 		to="/ik_lowerbody_node/write_sto"/>
+		<remap from="/save_csv" 		to="/ik_lowerbody_node/write_csv"/>
+		<remap from="/set_name_and_path" 	to="/ik_lowerbody_node/set_name_and_path"/>
+		<remap from="/clear" 			to="/ik_lowerbody_node/clear_loggers"/>
+
+		<param name="play_sound_after_calibration" 	value="$(arg play_sound_after_calibration)" />
+		<remap from="/play" 			to="/play_sound/play"/>
+
+
+		<param name="save_insoles" 		value="False" />
+		<remap from="/insole/clear" 			to="/moticon_insoles/clear"/>
+		<remap from="/insole/start" 			to="/moticon_insoles/record"/>
+		<remap from="/insole/stop"  			to="/moticon_insoles/stop"/>
+		<remap from="/insole/save" 			to="/moticon_insoles/save"/>
+		<remap from="/insole/set_name_and_path"		to="/moticon_insoles/setfilename"/>
+
+	</node>
+
+</launch>
+
